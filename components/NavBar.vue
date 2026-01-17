@@ -3,6 +3,9 @@
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="#">
+                    <figure class="image is-98x98 mr-2">
+                        <img src="/logo_white.png" alt="Lopev Logo">
+                    </figure>
                     <strong class="is-size-4 text-medical-blue">LOPEV</strong>
                 </a>
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">

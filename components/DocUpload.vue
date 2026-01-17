@@ -1,6 +1,6 @@
 <template>
     <div class="box box-hover has-text-centered">
-        <span class="icon is-large has-text-info">
+        <span class="icon is-large">
             <i class="fas fa-2x fa-file-upload"></i>
         </span>
         <p class="title is-5 mt-3">Exames</p>
@@ -74,3 +74,5 @@ const uploadFile = async () => {
     }
 };
 </script>
+
+<style scoped></style>

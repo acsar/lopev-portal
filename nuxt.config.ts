@@ -2,9 +2,10 @@ export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-
+  modules: ['vue3-perfect-scrollbar/nuxt'],
   css: [
     // 'bulma/css/bulma.css',
+    '@/assets/global.css'
   ],
 
   app: {

@@ -6,7 +6,8 @@
         <section class="hero is-medical-blue is-small">
             <div class="hero-body">
                 <div class="container">
-                    <h1 class="title has-text-white">Olá {{ userData.name }}, Bem-vindo ao seu Portal</h1>
+                    <h1 class="title has-text-white">Olá {{ userData.name }}, Bem-vindo ao seu
+                        Portal</h1>
                     <h2 class="subtitle has-text-white-ter is-size-6">Acompanhe seus exames e agendamentos de forma
                         simplificada.</h2>
                 </div>
@@ -20,7 +21,7 @@
                 </div>
                 <div class="column is-4">
                     <div class="box box-hover has-text-centered">
-                        <span class="icon is-large has-text-primary">
+                        <span class="icon is-large">
                             <i class="fas fa-2x fa-calendar-alt"></i>
                         </span>
                         <p class="title is-5 mt-3">Consultas</p>
@@ -29,7 +30,7 @@
                 </div>
                 <div class="column is-4">
                     <div class="box box-hover has-text-centered">
-                        <span class="icon is-large has-text-success">
+                        <span class="icon is-large">
                             <i class="fab fa-2x fa-whatsapp"></i>
                         </span>
                         <p class="title is-5 mt-3">Suporte</p>
@@ -84,15 +85,7 @@
         </div>
 
         <!-- Footer -->
-        <footer class="footer">
-            <div class="content has-text-centered">
-                <p>
-                    <strong>Lopev</strong> - Cuidado próximo, humano e completo.
-                    <br>
-                    <small class="has-text-grey">Suporte 24/7 via WhatsApp</small>
-                </p>
-            </div>
-        </footer>
+        <Footer />
     </div>
 </template>
 
@@ -100,6 +93,7 @@
 import { ref, onMounted } from 'vue'
 import DocUpload from '../components/DocUpload.vue'
 import TimeLine from '../components/TimeLine.vue'
+import Footer from '../components/footer.vue'
 
 const userData = ref('')
 
@@ -123,11 +117,15 @@ definePageMeta({
     }
 
     .is-medical-blue {
-        background-color: #2c5f8d !important;
+        background-color: #0f3e35 !important;
     }
 
     .text-medical-blue {
-        color: #2c5f8d !important;
+        color: #0f3e35 !important;
+    }
+
+    .container h2.subtitle {
+        color: #d8d3e7 !important;
     }
 
     /* Ajuste fino para o efeito de elevação que o Bulma puro não tem */

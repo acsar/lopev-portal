@@ -6,29 +6,34 @@
                 Histórico de Documentos
             </p>
         </header>
-        <div class="card-content">
-            <div class="medical-timeline">
-                <div class="timeline-item" v-for="(item, index) in timeline" :key="index">
-                    <p class="is-size-7 has-text-grey">{{ item.date }}</p>
-                    <p class="has-text-weight-bold">{{ item.doc_type }}</p>
-                    <div class="notification is-light py-2 px-3 mt-2 is-size-6">
-                        {{ item.analysis }}
-                    </div>
-                    <div class="buttons mt-2">
-                        <a :href="getStorageUrl(item.storage_url)" target="_blank" class="button is-small is-outlined">
-                            <span class="icon">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </a>
-                        <a @click.prevent="deleteDocument(item.id, item.storage_url)"
-                            class="button is-small is-outlined has-text-danger">
-                            <span class="icon">
-                                <i class="fas fa-trash-alt"></i>
-                            </span>
-                        </a>
+        <div class="mb-4">
+            <PerfectScrollbar>
+                <div class="card-content">
+                    <div class="medical-timeline">
+                        <div class="timeline-item" v-for="(item, index) in timeline" :key="index">
+                            <p class="is-size-7 has-text-grey">{{ item.date }}</p>
+                            <p class="has-text-weight-bold">{{ item.doc_type }}</p>
+                            <div class="notification is-light py-2 px-3 mt-2 is-size-6">
+                                {{ item.analysis }}
+                            </div>
+                            <div class="buttons mt-2">
+                                <a :href="getStorageUrl(item.storage_url)" target="_blank"
+                                    class="button is-small is-outlined">
+                                    <span class="icon">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </a>
+                                <a @click.prevent="deleteDocument(item.id, item.storage_url)"
+                                    class="button is-small is-outlined has-text-danger">
+                                    <span class="icon">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </PerfectScrollbar>
         </div>
     </div>
 </template>
@@ -66,6 +71,11 @@ const deleteDocument = (docId, storageKey) => {
 const { data: timeline } = await useFetch(url)
 </script>
 <style scoped>
+
+    .ps {
+        max-height: 360px;
+        /* or height: 100px; */
+    }
 
     /* Timeline simples com Bulma */
     .medical-timeline {

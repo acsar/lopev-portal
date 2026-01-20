@@ -110,7 +110,7 @@ const sendMessage = async () => {
         // Simula o estado de "digitando"
         isTyping.value = true;
 
-        const response = await fetch('https://n8n.lopevapp.com.br/webhook-test/8721972f-0100-4234-b58d-b935f2b6d3f7', {
+        const response = await fetch('https://n8n.lopevapp.com.br/webhook/8721972f-0100-4234-b58d-b935f2b6d3f7', {
             method: 'POST',
             body: formData,
         });

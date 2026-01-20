@@ -1,52 +1,61 @@
 <template>
-    <section class="herosss is-fullheight is-flex is-align-items-center">
-        <div class="container">
-            <div class="columns is-centered">
-                <div class="column is-4">
-                    <div class="box">
-                        <h1 class="title has-text-centered">Login</h1>
-                        <form @submit.prevent="handleLogin">
-                            <p v-if="errorMessage" class="notification is-danger is-light">{{ errorMessage }}</p>
-                            <div class="field">
-                                <label class="label">Email</label>
-                                <div class="control has-icons-left">
-                                    <input v-model="email" class="input" type="email" placeholder="Digite seu email"
-                                        required />
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-envelope"></i>
-                                    </span>
-                                </div>
-                            </div>
+    <main class="min-h-[calc(100vh-64px)] flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
 
-                            <div class="field">
-                                <label class="label">Senha</label>
-                                <div class="control has-icons-left">
-                                    <input v-model="password" class="input" type="password"
-                                        placeholder="Digite sua senha" required />
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-lock"></i>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <button class="button is-primary is-fullwidth" :class="{ 'is-loading': isLoading }"
-                                    :disabled="isLoading">
-                                    Entrar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <div class="flex flex-col items-center mb-8">
+                <img src="/logo_white.png" alt="Lopev Logo" class="h-16 w-16 mb-2 invert brightness-0" />
+                <h2 class="text-xl font-bold text-[#002d1e] tracking-tight">Portal do Paciente</h2>
             </div>
+
+            <UCard :ui="{
+                body: { padding: 'p-6 sm:p-10' },
+                ring: 'ring-1 ring-gray-200',
+                shadow: 'shadow-xl',
+                rounded: 'rounded-2xl'
+            }">
+                <div class="mb-6">
+                    <h1 class="text-2xl font-bold text-[#002d1e] text-center">Login</h1>
+                    <p class="text-gray-500 text-center text-sm mt-1">Acesse seus exames e histórico</p>
+                </div>
+
+                <form @submit.prevent="handleLogin" class="space-y-6">
+
+                    <UAlert v-if="errorMessage" icon="i-lucide-alert-circle" color="error" variant="subtle"
+                        title="Erro no acesso" :description="errorMessage" class="mb-4" />
+
+                    <UFormField label="E-mail" name="email" required>
+                        <UInput v-model="email" type="email" placeholder="Digite seu e-mail" icon="i-lucide-envelope"
+                            size="lg" class="w-full" />
+                    </UFormField>
+
+                    <UFormField label="Senha" name="password" required>
+                        <UInput v-model="password" type="password" placeholder="Digite sua senha" icon="i-lucide-lock"
+                            size="lg" class="w-full" />
+                    </UFormField>
+
+                    <UButton type="submit" size="lg" block :loading="isLoading" :disabled="isLoading"
+                        class="bg-[#002d1e] hover:bg-[#003d2a] text-white font-semibold transition-all py-3">
+                        Entrar
+                    </UButton>
+
+                    <div class="text-center mt-4">
+                        <UButton variant="link" color="neutral" size="xs" label="Esqueceu sua senha?"
+                            class="text-gray-500 hover:text-[#002d1e]" />
+                    </div>
+                </form>
+            </UCard>
+
+            <p class="text-center text-xs text-gray-400 mt-8 uppercase tracking-widest">
+                Sistema Seguro & Criptografado
+            </p>
         </div>
-    </section>
+    </main>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-
+// Mantendo suas variáveis originais
 const email = ref('')
 const password = ref('')
 const errorMessage = ref('')
@@ -87,9 +96,3 @@ async function handleLogin() {
     }
 }
 </script>
-
-<style scoped>
-    .hero {
-        background-color: #f5f5f5;
-    }
-</style>

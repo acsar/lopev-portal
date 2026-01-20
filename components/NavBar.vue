@@ -1,36 +1,21 @@
 <template>
-    <nav class="navbar is-white has-shadow" role="navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="#">
-                    <figure class="image is-98x98 mr-2">
-                        <img src="/logo_white.png" alt="Lopev Logo">
-                    </figure>
-                    <strong class="is-size-4 text-medical-blue">LOPEV</strong>
-                </a>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div class="navbar-menu">
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a v-show="false" class="button is-light is-rounded">
-                                <span class="icon"><i class="fas fa-user-circle"></i></span>
-                                <span>Meu Perfil</span>
-                            </a>
-                            <a @click="handleLogout" class="button is-danger is-light is-rounded">
-                                <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <header class="border-b border-gray-200 bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+
+            <NuxtLink to="/" class="flex items-center gap-2">
+                <img src="/logo_white.png" alt="Lopev Logo" class="h-10 w-10" />
+                <span class="text-lg font-bold text-[--ui-primary]">PORTAL DO PACIENTE</span>
+            </NuxtLink>
+
+            <div class="flex items-center gap-4">
+
+                <UButton v-if="false" icon="i-lucide-user-circle" label="Meu Perfil" variant="ghost" color="neutral" />
+
+                <UButton icon="i-lucide-log-out" color="error" variant="subtle" class="rounded-full"
+                    @click="handleLogout" />
             </div>
         </div>
-    </nav>
+    </header>
 </template>
 
 <script setup>
@@ -38,7 +23,8 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-function handleLogout() {
+const handleLogout = () => {
+    console.log('Logout clicado');
     // Clear user data from localStorage
     localStorage.removeItem('userData')
 

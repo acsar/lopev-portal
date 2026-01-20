@@ -17,12 +17,12 @@ import { ref } from 'vue';
 
 const props = defineProps({
     userId: {
-        type: String,
-        required: true
+        type: Number,
+        // required: true
     },
     partnerId: {
-        type: String,
-        required: true
+        type: Number,
+        // required: true
     }
 });
 

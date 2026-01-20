@@ -2,19 +2,36 @@ export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['vue3-perfect-scrollbar/nuxt'],
-  css: [
-    // 'bulma/css/bulma.css',
-    '@/assets/global.css'
+  modules: [
+    //'vue3-perfect-scrollbar/nuxt',
+    '@nuxt/ui',
+
   ],
+  theme: {
+    extend: {
+      colors: {
+        'medical-dark': '#002d1e',
+        'icons-medical': '#7435c1'
+      }
+    }
+  },
+  css: [
+    '~/assets/css/main.css',
+    'assets/css/style.css'
+  ],
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag === 'deep-chat'
+    }
+  },
 
   app: {
     head: {
       link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css'
-        },
+        // {
+        //   rel: 'stylesheet',
+        //   href: 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css'
+        // },
         {
           rel: 'stylesheet',
           href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'

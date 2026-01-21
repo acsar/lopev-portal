@@ -7,7 +7,9 @@
             </div>
         </template>
 
-        <div ref="messagesContainer" class="h-[300px] overflow-y-auto p-4 bg-gray-50/50 flex flex-col gap-4 w-full">
+        <!-- <div ref="messagesContainer" class="h-[300px] overflow-y-auto p-4 bg-gray-50/50 flex flex-col gap-4 w-full"> -->
+        <div ref="messagesContainer"
+            class="h-[300px] overflow-y-auto p-4 bg-gray-50/50 flex flex-col gap-4 w-full scroll-smooth">
             <div v-for="message in messages" :key="message.id" class="flex w-full"
                 :class="message.sender === 'bot' ? 'justify-start' : 'justify-end'">
                 <div class="max-w-[80%] px-4 py-2 rounded-2xl text-sm shadow-sm" :class="message.sender === 'bot'
@@ -103,6 +105,10 @@ const sendMessage = async () => {
             sender: 'user',
         });
 
+        // Rolar IMEDIATAMENTE após a mensagem do usuário aparecer
+        await nextTick();
+        scrollToBottom();
+
         userMessage.value = '';
         file.value = null;
         if (fileInput.value) fileInput.value.value = '';
@@ -140,10 +146,11 @@ const scrollToBottom = () => {
     }
 };
 
-watch(messages, async () => {
+// Observa mudanças profundas no array e também o estado de digitação
+watch([messages, isTyping], async () => {
     await nextTick();
     scrollToBottom();
-});
+}, { deep: true });
 </script>
 
 <style scoped>

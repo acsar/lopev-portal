@@ -10,7 +10,8 @@
                 <div class="flex">
                     <UButton icon="i-lucide-refresh-cw" variant="ghost" color="neutral" :loading="status === 'pending'"
                         @click="refresh">Atualizar</UButton>
-                    <!-- <DocUpload :userId="props.userId" :partnerId="props.partnerId" /> -->
+                    <DocUpload :userId="props.userId" :partnerId="props.partnerId" />
+                    <!-- <UButton icon="i-lucide-upload" variant="ghost" color="neutral" :loading="status === 'pending'" /> -->
                 </div>
             </div>
         </template>
@@ -36,10 +37,7 @@
                 </template>
 
                 <template #date="{ item }">
-                    {{ new Date(item.date).toLocaleDateString('pt-BR', {
-                        day: '2-digit', month: '2-digit', year:
-                            'numeric'
-                    }) }}
+                    {{ useTimeAgo(new Date(item.date)) }}
                 </template>
 
                 <template #title="{ item }">
@@ -55,7 +53,6 @@
                             @click="handleDelete(item.id, item.storage_url)" />
                     </div>
                 </template>
-
 
             </UTimeline>
         </div>

@@ -7,14 +7,6 @@ export default defineNuxtConfig({
     '@nuxt/ui',
 
   ],
-  theme: {
-    extend: {
-      colors: {
-        'medical-dark': '#002d1e',
-        'icons-medical': '#7435c1'
-      }
-    }
-  },
   css: [
     '~/assets/css/main.css',
     'assets/css/style.css'
@@ -24,7 +16,6 @@ export default defineNuxtConfig({
       isCustomElement: (tag) => tag === 'deep-chat'
     }
   },
-
   app: {
     head: {
       link: [
@@ -42,5 +33,5 @@ export default defineNuxtConfig({
         }
       ]
     }
-  }
+  },
 })

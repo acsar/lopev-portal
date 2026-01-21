@@ -20,18 +20,18 @@
 
             <div class="flex-1">
                 <!-- <div class="flex items-center gap-2 mb-1">
-                    <UIcon name="i-lucide-shield-check" class="medical-dark w-4 h-4" />
-                    <span class="medical-dark text-xs font-medium uppercase tracking-wider">
+                    <UIcon name="i-lucide-shield-check" class=" w-4 h-4" />
+                    <span class=" text-xs font-medium uppercase tracking-wider">
                         Área Restrita do Paciente
                     </span>
                 </div> -->
 
-                <h1 class="text-2xl font-semibold medical-dark tracking-tight">
+                <h1 class="text-2xl text-[#0f3e35] font-semibold tracking-tight">
                     Olá, {{ userData.name }}, Bem-vindo ao seu Portal
                 </h1>
 
-                <p class="mt-2 medical-dark text-sm md:text-base leading-relaxed max-w-2xl">
-                    Envie e acompanhe seus exames e agendamentos de forma simplificada.
+                <p class="mt-1 text-[#0f3e35] text-sm md:text-base leading-relaxed max-w-2xl">
+                    Envie e acompanhe seus exames, atestados, receitas e histórico de saúde de forma simplificada.
                 </p>
             </div>
 

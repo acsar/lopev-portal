@@ -2,9 +2,10 @@
     <div>
         <NavBar />
         <div class="p-2 sm:p-4 lg:p-6">
-            <Hero :userData="userData" class="mb-4" />
-            <div class="grid grid-cols-1 md:grid-cols-[60%_40%] gap-1">
+
+            <div class="grid grid-cols-1 md:grid-cols-[60%_40%] gap-2">
                 <div>
+                    <Hero :userData="userData" class="mb-4" />
                     <TimeLine :userId="userData.userId" :partnerId="userData.partnerId" />
                 </div>
                 <div>

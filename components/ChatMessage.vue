@@ -94,14 +94,14 @@ const sendMessage = async () => {
     formData.append("userId", props.userId);
     formData.append("partnerId", props.partnerId);
     formData.append('text', userMessage.value);
-    if (file.value) {
-        formData.append('file', file.value);
-    }
+    // if (file.value) {
+    //     formData.append('file', file.value);
+    // }
 
     try {
         messages.value.push({
             id: Date.now(),
-            text: userMessage.value || `Arquivo enviado: ${file.value.name}`,
+            text: userMessage.value,
             sender: 'user',
         });
 
@@ -110,13 +110,13 @@ const sendMessage = async () => {
         scrollToBottom();
 
         userMessage.value = '';
-        file.value = null;
-        if (fileInput.value) fileInput.value.value = '';
+        // file.value = null;
+        // if (fileInput.value) fileInput.value.value = '';
 
         // Simula o estado de "digitando"
         isTyping.value = true;
 
-        const response = await fetch('https://n8n.lopevapp.com.br/webhook/8721972f-0100-4234-b58d-b935f2b6d3f7', {
+        const response = await fetch('https://n8n.lopevapp.com.br/webhook-test/b0dcbce8-23be-4258-ada4-2aa962ce5e82', {
             method: 'POST',
             body: formData,
         });

@@ -59,6 +59,7 @@
 
 <script setup>
 import { nextTick, watch, ref } from 'vue';
+import { usePusher } from '@/composables/usePusher';
 
 const props = defineProps({
     userId: Number,
@@ -71,8 +72,8 @@ const fileInput = ref(null); // Referência para o input HTML
 const isTyping = ref(false); // Novo estado para controlar a digitação
 const messagesContainer = ref(null);
 
-const messages = ref([
-]);
+// Usando o composable usePusher
+const { messages } = usePusher(props.userId);
 
 // Abre a janela de seleção de arquivo
 const triggerFileUpload = () => {
@@ -94,9 +95,6 @@ const sendMessage = async () => {
     formData.append("userId", props.userId);
     formData.append("partnerId", props.partnerId);
     formData.append('text', userMessage.value);
-    // if (file.value) {
-    //     formData.append('file', file.value);
-    // }
 
     try {
         messages.value.push({
@@ -110,8 +108,6 @@ const sendMessage = async () => {
         scrollToBottom();
 
         userMessage.value = '';
-        // file.value = null;
-        // if (fileInput.value) fileInput.value.value = '';
 
         // Simula o estado de "digitando"
         isTyping.value = true;
@@ -123,18 +119,18 @@ const sendMessage = async () => {
 
         const data = await response.json();
 
-        setTimeout(async () => {
-            isTyping.value = false;
-            messages.value.push({
-                id: Date.now(),
-                text: data.text,
-                sender: 'bot',
-            });
+        // setTimeout(async () => {
+        //     isTyping.value = false;
+        //     messages.value.push({
+        //         id: Date.now(),
+        //         text: data.text,
+        //         sender: 'bot',
+        //     });
 
-            // Aguarda o DOM atualizar e rola o scroll
-            await nextTick();
-            scrollToBottom();
-        }, 2000);
+        //     // Aguarda o DOM atualizar e rola o scroll
+        //     await nextTick();
+        //     scrollToBottom();
+        // }, 2000);
     } catch (error) {
         console.error('Erro ao enviar mensagem:', error);
     }

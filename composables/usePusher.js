@@ -1,20 +1,20 @@
 import Pusher from 'pusher-js'
 
-export const usePusher = () => {
+export const usePusher = (userId) => {
     const messages = ref([])
 
     if (process.client) {
         const pusher = new Pusher(
-            'SUA_PUSHER_KEY',
-            { cluster: 'SUA_CLUSTER' }
+            '03dd51c33f763b613a2f',
+            { cluster: 'sa1' }
         )
 
-        const channel = pusher.subscribe('events')
+        const channel = pusher.subscribe(`client-${userId}`)
 
-        channel.bind('new-message', (data) => {
+        channel.bind('update', (data) => {
             messages.value.push({
                 ...data,
-                at: Date.now()
+                id: Date.now()
             })
         })
     }

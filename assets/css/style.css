@@ -1,6 +1,7 @@
 html,
   body {
     background-color: var(--color-gray-100);
+    overflow-x: hidden;
   }
 
 .cor-de-fundo {

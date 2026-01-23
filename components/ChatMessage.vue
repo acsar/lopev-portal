@@ -2,8 +2,8 @@
     <UCard :ui="{ body: { padding: 'p-0' } }">
         <template #header>
             <div class="flex items-center gap-2">
-                <UIcon name="i-lucide-help-circle" class="w-5 h-5 text-[#002d1e]" />
-                <h3 class="font-semibold text-[#002d1e]">Preciso de ajuda</h3>
+                <UIcon name="i-lucide-list" class="w-5 h-5 text-[#002d1e]" />
+                <h3 class="font-semibold text-[#002d1e]">Registre seu histórico</h3>
             </div>
         </template>
 
@@ -39,10 +39,11 @@
                         class="flex-1" @keyup.enter.exact.prevent="sendMessage" />
 
                     <div class="flex gap-1">
-                        <UButton icon="i-lucide-send" color="primary" :disabled="!userMessage.trim() && !file"
-                            @click="sendMessage" />
+                        <UButton icon="i-lucide-send" color="primary" variant="soft"
+                            :disabled="!userMessage.trim() && !file" @click="sendMessage" />
                         <input ref="fileInput" type="file" class="hidden" @change="onFileChange" />
-                        <UButton icon="i-lucide-paperclip" color="neutral" variant="ghost" @click="triggerFileUpload" />
+                        <UButton icon="i-lucide-upload" label="Anexar arquivo" color="primary" variant="soft"
+                            @click="triggerFileUpload" />
                     </div>
                 </div>
 
@@ -94,6 +95,7 @@ const sendMessage = async () => {
     const formData = new FormData();
     formData.append("user_id", props.userId);
     formData.append("partner_id", props.partnerId);
+    formData.append('date', new Date().toISOString().split('T')[0]);
     formData.append('text', userMessage.value);
 
     try {

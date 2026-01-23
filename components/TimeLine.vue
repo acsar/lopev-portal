@@ -43,20 +43,26 @@
                 </template>
 
                 <template #title="{ item }">
-                    <span>{{ item.doc_type }}</span>
+                    <span>{{ item.doc_type != 'user_report' ? item.doc_type : 'Relato' }}</span>
                 </template>
 
                 <template #description="{ item }">
-                    <span>{{ item.analysis }}</span>
-                    <div>
-                        <UButton icon="i-lucide-external-link" size="xs" variant="subtle" color="neutral"
-                            label="Abrir Documento" class="text-[#002d1e]" @click="openDocument(item.storage_url)" />
+                    <div v-if="item.doc_type != 'user_report'">
+                        <span>{{ item.analysis }}</span>
+                        <div>
+                            <UButton icon="i-lucide-external-link" size="xs" variant="subtle" color="neutral"
+                                label="Abrir Documento" class="text-[#002d1e]"
+                                @click="openDocument(item.storage_url)" />
+                            <UButton icon="i-lucide-trash-2" size="xs" variant="ghost" color="error"
+                                @click="handleDelete(item.id, item.storage_url)" />
+                        </div>
+                    </div>
+                    <div v-else>
+                        <span>{{ item.human_message }}</span>
                         <UButton icon="i-lucide-trash-2" size="xs" variant="ghost" color="error"
-                            @click="handleDelete(item.id, item.storage_url)" />
+                            @click="handleDelete(item.id, null)" />
                     </div>
                 </template>
-
-
             </UTimeline>
         </div>
     </UCard>

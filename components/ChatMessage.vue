@@ -39,11 +39,10 @@
                         class="flex-1" @keyup.enter.exact.prevent="sendMessage" />
 
                     <div class="flex gap-1">
-                        <input ref="fileInput" type="file" class="hidden" @change="onFileChange" />
-                        <UButton icon="i-lucide-paperclip" color="neutral" variant="ghost" @click="triggerFileUpload" />
-
                         <UButton icon="i-lucide-send" color="primary" :disabled="!userMessage.trim() && !file"
                             @click="sendMessage" />
+                        <input ref="fileInput" type="file" class="hidden" @change="onFileChange" />
+                        <UButton icon="i-lucide-paperclip" color="neutral" variant="ghost" @click="triggerFileUpload" />
                     </div>
                 </div>
 
@@ -85,6 +84,7 @@ const onFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
         file.value = selectedFile;
+        sendFile();
     }
 };
 
@@ -92,8 +92,8 @@ const sendMessage = async () => {
     if (!userMessage.value.trim() && !file.value) return;
 
     const formData = new FormData();
-    formData.append("userId", props.userId);
-    formData.append("partnerId", props.partnerId);
+    formData.append("user_id", props.userId);
+    formData.append("partner_id", props.partnerId);
     formData.append('text', userMessage.value);
 
     try {
@@ -112,29 +112,85 @@ const sendMessage = async () => {
         // Simula o estado de "digitando"
         isTyping.value = true;
 
-        const response = await fetch('https://n8n.lopevapp.com.br/webhook-test/b0dcbce8-23be-4258-ada4-2aa962ce5e82', {
+        const response = await fetch('https://n8n.lopevapp.com.br/webhook/b0dcbce8-23be-4258-ada4-2aa962ce5e82', {
             method: 'POST',
             body: formData,
         });
 
         const data = await response.json();
 
-        // setTimeout(async () => {
-        //     isTyping.value = false;
-        //     messages.value.push({
-        //         id: Date.now(),
-        //         text: data.text,
-        //         sender: 'bot',
-        //     });
+        setTimeout(async () => {
+            isTyping.value = false;
+            messages.value.push({
+                id: Date.now(),
+                text: data.text,
+                sender: 'bot',
+            });
 
-        //     // Aguarda o DOM atualizar e rola o scroll
-        //     await nextTick();
-        //     scrollToBottom();
-        // }, 2000);
+            // Aguarda o DOM atualizar e rola o scroll
+            await nextTick();
+            scrollToBottom();
+        }, 2000);
     } catch (error) {
         console.error('Erro ao enviar mensagem:', error);
     }
 };
+
+const sendFile = async () => {
+    if (!file.value) return;
+
+    const formData = new FormData();
+    formData.append("user_id", props.userId);
+    formData.append("partner_id", props.partnerId);
+    formData.append('filename', generateUniqueFileName());
+    formData.append('file', file.value);
+
+    try {
+        messages.value.push({
+            id: Date.now(),
+            text: `Documento enviado: ${file.value.name}`,
+            sender: 'user',
+        });
+
+        // Rolar IMEDIATAMENTE após a mensagem do usuário aparecer
+        await nextTick();
+        scrollToBottom();
+
+        file.value = null;
+
+        // Simula o estado de "digitando"
+        isTyping.value = true;
+
+        const response = await fetch('https://n8n.lopevapp.com.br/webhook/b0dcbce8-23be-4258-ada4-2aa962ce5e82', {
+            method: 'POST',
+            body: formData,
+        });
+
+        const data = await response.json();
+
+        setTimeout(async () => {
+            isTyping.value = false;
+            messages.value.push({
+                id: Date.now(),
+                text: data.text,
+                sender: 'bot',
+            });
+
+            // Aguarda o DOM atualizar e rola o scroll
+            await nextTick();
+            scrollToBottom();
+        }, 2000);
+    } catch (error) {
+        console.error('Erro ao enviar arquivo:', error);
+    }
+};
+
+// Gera um nome de arquivo único
+function generateUniqueFileName() {
+    const timestamp = Date.now(); // Obtém o timestamp atual
+    const randomPart = Math.random().toString(36).substring(2, 15); // Gera uma string aleatória
+    return `file_${timestamp}_${randomPart}`;
+}
 
 const scrollToBottom = () => {
     if (messagesContainer.value) {
@@ -147,6 +203,8 @@ watch([messages, isTyping], async () => {
     await nextTick();
     scrollToBottom();
 }, { deep: true });
+
+
 </script>
 
 <style scoped>

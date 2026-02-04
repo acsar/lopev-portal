@@ -9,7 +9,7 @@
                 </div>
                 <div class="flex">
                     <UButton icon="i-lucide-refresh-cw" variant="ghost" color="neutral" :loading="status === 'pending'"
-                        @click="refresh">Atualizar</UButton>
+                        @click="refreshTimeline">Atualizar</UButton>
                     <!-- <DocUpload :userId="props.userId" :partnerId="props.partnerId" /> -->
                 </div>
             </div>
@@ -32,7 +32,9 @@
             }">
 
                 <template #indicator="{ item }">
-                    <UIcon :name="getDocIcon(item.doc_type)" class="w-5 h-5 text-[#002d1e]" />
+                    <UIcon
+                        :name="item.doc_type == 'user_report' ? 'i-lucide-message-square-text' : 'i-lucide-clipboard-plus'"
+                        class="w-5 h-5 text-[#002d1e]" />
                 </template>
 
                 <template #date="{ item }">
@@ -48,7 +50,7 @@
 
                 <template #description="{ item }">
                     <div v-if="item.doc_type != 'user_report'">
-                        <span>{{ item.analysis }}</span>
+                        <!-- <span>{{ item.analysis }}</span> -->
                         <div>
                             <UButton icon="i-lucide-external-link" size="xs" variant="subtle" color="neutral"
                                 label="Abrir Documento" class="text-[#002d1e]"
@@ -75,7 +77,8 @@ import DocUpload from './DocUpload.vue';
 // Em SPA, não precisamos de await top-level no useFetch se não quisermos bloquear o componente
 const props = defineProps({
     userId: Number,
-    partnerId: Number
+    partnerId: Number,
+    refreshKey: Number, // Add a prop to trigger refresh
 });
 
 // 1. Dicionário de ícones (Fácil de expandir)
@@ -139,6 +142,16 @@ const handleDelete = async (docId, storageKey) => {
         alert('Erro ao excluir documento.');
     }
 };
+
+// Rename the `refresh` method to avoid conflict with the `refresh` function from `useFetch`
+const refreshTimeline = () => {
+    refresh(); // Call the `refresh` function from `useFetch`
+};
+
+// Watch the `refreshKey` prop and call the `refresh` function when it changes
+watch(() => props.refreshKey, () => {
+    refresh(); // Call the `refresh` function from `useFetch`
+});
 
 // const formatDate = (dateStr) => {
 //     if (!dateStr) return '';

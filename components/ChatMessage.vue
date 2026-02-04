@@ -75,6 +75,9 @@ const messagesContainer = ref(null);
 // Usando o composable usePusher
 const { messages } = usePusher(props.userId);
 
+// Add the `emit` function from `defineEmits` to enable event emission
+const emit = defineEmits(['refresh-timeline']);
+
 // Abre a janela de seleção de arquivo
 const triggerFileUpload = () => {
     fileInput.value.click();
@@ -105,13 +108,11 @@ const sendMessage = async () => {
             sender: 'user',
         });
 
-        // Rolar IMEDIATAMENTE após a mensagem do usuário aparecer
         await nextTick();
         scrollToBottom();
 
         userMessage.value = '';
 
-        // Simula o estado de "digitando"
         isTyping.value = true;
 
         const response = await fetch('https://n8n.lopevapp.com.br/webhook/b0dcbce8-23be-4258-ada4-2aa962ce5e82', {
@@ -129,9 +130,11 @@ const sendMessage = async () => {
                 sender: 'bot',
             });
 
-            // Aguarda o DOM atualizar e rola o scroll
             await nextTick();
             scrollToBottom();
+
+            // Emitir evento para o componente pai
+            emit('refresh-timeline');
         }, 2000);
     } catch (error) {
         console.error('Erro ao enviar mensagem:', error);
@@ -154,13 +157,11 @@ const sendFile = async () => {
             sender: 'user',
         });
 
-        // Rolar IMEDIATAMENTE após a mensagem do usuário aparecer
         await nextTick();
         scrollToBottom();
 
         file.value = null;
 
-        // Simula o estado de "digitando"
         isTyping.value = true;
 
         const response = await fetch('https://n8n.lopevapp.com.br/webhook/b0dcbce8-23be-4258-ada4-2aa962ce5e82', {
@@ -178,9 +179,11 @@ const sendFile = async () => {
                 sender: 'bot',
             });
 
-            // Aguarda o DOM atualizar e rola o scroll
             await nextTick();
             scrollToBottom();
+
+            // Emitir evento para o componente pai
+            emit('refresh-timeline');
         }, 2000);
     } catch (error) {
         console.error('Erro ao enviar arquivo:', error);
@@ -210,6 +213,7 @@ watch([messages, isTyping], async () => {
 </script>
 
 <style scoped>
+
     .typing-indicator {
         display: flex;
         gap: 4px;

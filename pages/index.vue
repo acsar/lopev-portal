@@ -6,10 +6,11 @@
             <div class="grid grid-cols-1 md:grid-cols-[minmax(0,60%)_minmax(0,40%)] gap-2">
                 <div>
                     <Hero :userData="userData" class="mb-4" />
-                    <TimeLine :userId="userData.userId" :partnerId="userData.partnerId" />
+                    <TimeLine :userId="userData.userId" :partnerId="userData.partnerId" :refreshKey="refreshKey" />
                 </div>
                 <div>
-                    <ChatMessage :userId="userData.userId" :partnerId="userData.partnerId" />
+                    <ChatMessage :userId="userData.userId" :partnerId="userData.partnerId"
+                        @refresh-timeline="refreshTimeline" />
                 </div>
             </div>
         </div>
@@ -18,8 +19,6 @@
 </template>
 
 <script setup>
-// Com <script setup>, você não precisa de export default ou components: {}
-// O Nuxt importa o NavBar automaticamente!
 import { ref, onMounted } from 'vue'
 import DocUpload from '../components/DocUpload.vue'
 import TimeLine from '../components/TimeLine.vue'
@@ -29,6 +28,13 @@ const userData = ref({
     userId: null,
     partnerId: null
 })
+
+const timeline = ref(null)
+const refreshKey = ref(0) // Reactive variable to trigger refresh
+
+const refreshTimeline = () => {
+    refreshKey.value++ // Increment the key to trigger the watcher in TimeLine
+};
 
 onMounted(() => {
     if (process.client) {

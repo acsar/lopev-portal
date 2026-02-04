@@ -4,6 +4,11 @@ html,
     overflow-x: hidden;
   }
 
+button {
+    cursor: pointer !important;
+}
+
+
 .cor-de-fundo {
     color: #0f3e35
 }

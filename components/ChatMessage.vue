@@ -59,13 +59,15 @@
 
 <script setup>
 import { nextTick, watch, ref } from 'vue';
-import { usePusher } from '@/composables/usePusher';
+import { useRouter } from 'vue-router';
+// import { usePusher } from '@/composables/usePusher';
 
 const props = defineProps({
     userId: Number,
     partnerId: Number
 });
 
+const router = useRouter();
 const userMessage = ref('');
 const file = ref(null);
 const fileInput = ref(null); // Referência para o input HTML
@@ -73,7 +75,7 @@ const isTyping = ref(false); // Novo estado para controlar a digitação
 const messagesContainer = ref(null);
 
 // Usando o composable usePusher
-const { messages } = usePusher(props.userId);
+// const { messages } = usePusher(props.userId);
 
 // Add the `emit` function from `defineEmits` to enable event emission
 const emit = defineEmits(['refresh-timeline']);
@@ -120,10 +122,19 @@ const sendMessage = async () => {
             body: formData,
         });
 
-        if (response.success == false)
-            redirect('/warning')
+        // Check HTTP response status
+        if (!response.success == false) {
+            router.push('/warning');
+            return;
+        }
 
         const data = await response.json();
+
+        // Check API success flag
+        if (data.success === false) {
+            router.push('/warning');
+            return;
+        }
 
         setTimeout(async () => {
             isTyping.value = false;
@@ -153,6 +164,8 @@ const sendFile = async () => {
     formData.append('filename', generateUniqueFileName());
     formData.append('file', file.value);
 
+
+
     try {
         messages.value.push({
             id: Date.now(),
@@ -171,6 +184,12 @@ const sendFile = async () => {
             method: 'POST',
             body: formData,
         });
+
+        // Check HTTP response status
+        if (!response.success == false) {
+            router.push('/warning');
+            return;
+        }
 
         const data = await response.json();
 

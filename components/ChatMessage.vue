@@ -120,6 +120,9 @@ const sendMessage = async () => {
             body: formData,
         });
 
+        if (response.success == false)
+            redirect('/warning')
+
         const data = await response.json();
 
         setTimeout(async () => {

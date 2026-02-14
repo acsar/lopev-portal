@@ -9,7 +9,7 @@
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title has-text-white">Olá {{ userData.name }}, Bem-vindo ao seu
-                        Portal</h1>
+                        Histórico Saúde</h1>
                     <h2 class="subtitle has-text-white-ter is-size-6">Acompanhe seus exames e agendamentos de forma
                         simplificada.</h2>
                 </div>

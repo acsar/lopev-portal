@@ -11,8 +11,8 @@
                 </div>
                 <div class="flex flex-col text-left">
                     <span class="text-xl font-black text-[#0f3e35] tracking-tight text-nowrap">HISTÓRICO SAÚDE</span>
-                    <span class="text-xs text-[#a18cc0] font-medium uppercase tracking-widest">Lopev Health
-                        Platform</span>
+                    <!-- <span class="text-xs text-[#a18cc0] font-medium uppercase tracking-widest">Lopev Health
+                        Platform</span> -->
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
             </div>
 
             <!-- Contact Section -->
-            <div class="w-full space-y-4">
+            <div class="w-full space-y-2">
                 <a href="https://wa.me/553235120280" target="_blank"
                     class="flex items-center justify-center gap-3 bg-[#0f3e35] hover:bg-[#1a5a4e] text-white font-bold py-5 px-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 shadow-xl hover:shadow-[#0f3e35]/20 w-full">
                     <i class="fa-brands fa-whatsapp text-2xl"></i>
@@ -53,7 +53,7 @@
             </div>
 
             <!-- Footer / Slogan -->
-            <div class="mt-12 pt-8 border-t border-gray-100 w-full text-pretty">
+            <div class="mt-2 pt-2 border-t border-gray-100 w-full text-pretty">
                 <p class="text-[#0f3e35] font-bold text-sm tracking-wide">
                     Lopev — <span class="text-[#a18cc0]">Sua saúde</span>, <span class="text-[#a18cc0]">Seu
                         tempo</span>, <span class="text-[#a18cc0]">Seu jeito</span>.
@@ -61,11 +61,11 @@
             </div>
 
             <!-- User management -->
-            <button @click="handleLogout"
+            <!-- <button @click="handleLogout"
                 class="mt-8 text-sm font-medium text-gray-400 hover:text-red-500 transition-colors flex items-center gap-2">
                 <i class="fa-solid fa-arrow-left-long"></i>
                 Sair e tentar outra conta
-            </button>
+            </button> -->
         </div>
     </div>
 </template>

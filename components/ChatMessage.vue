@@ -75,7 +75,7 @@ const isTyping = ref(false); // Novo estado para controlar a digitação
 const messagesContainer = ref(null);
 
 // Usando o composable usePusher
-// const { messages } = usePusher(props.userId);
+const messages = ref([]);
 
 // Add the `emit` function from `defineEmits` to enable event emission
 const emit = defineEmits(['refresh-timeline']);

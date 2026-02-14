@@ -5,7 +5,7 @@
             <NuxtLink to="/" class="flex items-center gap-2">
                 <img src="/logo_white.png" alt="Lopev Logo" class="h-10 brightness-0 invert" />
                 <div class="flex flex-col">
-                    <span class="text-lg font-bold text-white">PORTAL DO USUÁRIO</span>
+                    <span class="text-lg font-bold text-white">HISTÓRICO SAÚDE</span>
                     <span class="text-sm text-[#d8d3e7]">Sua Saúde, seu tempo, seu jeito</span>
                 </div>
             </NuxtLink>

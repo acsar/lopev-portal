@@ -2,9 +2,9 @@
     <main class="min-h-[calc(100vh-64px)] flex items-center justify-center p-4">
         <div class="w-full max-w-md">
 
-            <div class="flex flex-col items-center mb-8">
-                <img src="/logo_white.png" alt="Lopev Logo" class="h-16 w-16 mb-2 invert brightness-0" />
-                <h2 class="text-xl font-bold text-[#002d1e] tracking-tight">Portal do Paciente</h2>
+            <div class="flex flex-col items-center mb-4">
+                <img src="/logo_white.png" alt="Lopev Logo" class="w-16" />
+                <!-- <h2 class="text-xl font-bold text-[#002d1e] tracking-tight">Histórico Saúde</h2> -->
             </div>
 
             <UCard :ui="{
@@ -15,6 +15,7 @@
             }">
                 <div class="mb-6">
                     <h1 class="text-2xl font-bold text-[#002d1e] text-center">Login</h1>
+                    <h2 class="text-xl font-bold text-[#002d1e] text-center tracking-tight">Histórico Saúde</h2>
                     <p class="text-gray-500 text-center text-sm mt-1">Acesse seus exames e histórico</p>
                 </div>
 
@@ -38,9 +39,10 @@
                         Entrar
                     </UButton>
 
-                    <div class="text-center mt-4">
-                        <UButton variant="link" color="neutral" size="xs" label="Esqueceu sua senha?"
-                            class="text-gray-500 hover:text-[#002d1e]" />
+                    <div class="text-center mt-2">
+
+                        <UButton href="https://odoo.lopevapp.com.br/web/reset_password" variant="link" color="neutral"
+                            size="xs" label="Esqueceu sua senha?" class="text-gray-500 hover:text-[#002d1e]" />
                     </div>
                 </form>
             </UCard>

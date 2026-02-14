@@ -27,7 +27,7 @@
                 </div> -->
 
                 <h1 class="text-2xl text-[#0f3e35] font-semibold tracking-tight">
-                    Olá, {{ userData.name }}, Bem-vindo ao seu Portal
+                    Olá, {{ userData.name }}, Bem-vindo ao seu Histórico Saúde
                 </h1>
 
                 <p class="mt-1 text-[#0f3e35] text-sm md:text-base leading-relaxed max-w-2xl">
